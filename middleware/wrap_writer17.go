@@ -12,6 +12,16 @@ import (
 func NewWrapResponseWriter(w http.ResponseWriter, protoMajor int) WrapResponseWriter {
 	_, cn := w.(http.CloseNotifier)
 	_, fl := w.(http.Flusher)
+	_, hj := w.(http.Hijacker)
+	_, rf := w.(io.ReaderFrom)
+	_, ps := w.(http.Pusher)
+
+	log.Printf("rw: %T", w)
+	log.Printf("cn: %v", cn)
+	log.Printf("fl: %v", fl)
+	log.Printf("hj: %v", hj)
+	log.Printf("rf: %v", rf)
+	log.Printf("ps: %v", ps)
 
 	bw := basicWriter{ResponseWriter: w}
 
